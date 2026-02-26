@@ -243,10 +243,13 @@ HTML_TEMPLATE = """<!doctype html>
     });
 
     function diagonal(link) {
-      return `M${link.source.y},${link.source.x}
-              C${(link.source.y + link.target.y) / 2},${link.source.x}
-               ${(link.source.y + link.target.y) / 2},${link.target.x}
-               ${link.target.y},${link.target.x}`;
+      const sourceAnchorY = link.source.y + (link.source._labelRight || 0);
+      const targetAnchorY = link.target.y;
+      const midY = (sourceAnchorY + targetAnchorY) / 2;
+      return `M${sourceAnchorY},${link.source.x}
+              C${midY},${link.source.x}
+               ${midY},${link.target.x}
+               ${targetAnchorY},${link.target.x}`;
     }
 
     function wrapLabel(text, maxChars = LINE_WRAP_AT) {
@@ -429,13 +432,17 @@ HTML_TEMPLATE = """<!doctype html>
         const text = nodeSel.select('text');
         const textEl = text.node();
         if (!textEl) return;
+        const datum = nodeSel.datum();
         const bbox = textEl.getBBox();
+        const boxX = bbox.x - 4;
+        const boxWidth = bbox.width + 8;
         nodeSel
           .select('rect.label-bg')
-          .attr('x', bbox.x - 4)
+          .attr('x', boxX)
           .attr('y', bbox.y - 2)
-          .attr('width', bbox.width + 8)
+          .attr('width', boxWidth)
           .attr('height', bbox.height + 4);
+        datum._labelRight = Math.max(0, boxX + boxWidth);
       });
 
       node.exit().transition().duration(220).attr('transform', () => `translate(${source.y},${source.x})`).remove();
