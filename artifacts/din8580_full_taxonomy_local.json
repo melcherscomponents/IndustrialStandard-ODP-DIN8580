@@ -1,0 +1,1246 @@
+{
+  "edge_count": 198,
+  "node_count": 199,
+  "roots": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Putzen_oder_Verputzen",
+                  "label": "Putzen oder Verputzen",
+                  "raw_fragment": "Putzen_oder_Verputzen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_breiigen_Zustand",
+              "label": "Beschichten aus dem breiigen Zustand",
+              "raw_fragment": "Beschichten_aus_dem_breiigen_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Anstreichen_oder_Lackieren",
+                  "label": "Anstreichen oder Lackieren",
+                  "raw_fragment": "Anstreichen_oder_Lackieren"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_durch_Giessen",
+                  "label": "Beschichten durch Giessen",
+                  "raw_fragment": "Beschichten_durch_Giessen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschriften",
+                  "label": "Beschriften",
+                  "raw_fragment": "Beschriften"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Drucken_oder_Bedrucken",
+                  "label": "Drucken oder Bedrucken",
+                  "raw_fragment": "Drucken_oder_Bedrucken"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Emaillieren_oder_Glasieren",
+                  "label": "Emaillieren oder Glasieren",
+                  "raw_fragment": "Emaillieren_oder_Glasieren"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Faerben",
+                  "label": "Faerben",
+                  "raw_fragment": "Faerben"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Schmelztauchen",
+                  "label": "Schmelztauchen",
+                  "raw_fragment": "Schmelztauchen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_fluessigen_Zustand",
+              "label": "Beschichten aus dem fluessigen Zustand",
+              "raw_fragment": "Beschichten_aus_dem_fluessigen_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Vakuumbedampfen",
+                  "label": "Vakuumbedampfen",
+                  "raw_fragment": "Vakuumbedampfen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Vakuumbestaeuben",
+                  "label": "Vakuumbestaeuben",
+                  "raw_fragment": "Vakuumbestaeuben"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_gas-_oder_dampffoermigen_Zustand",
+              "label": "Beschichten aus dem gas- oder dampffoermigen Zustand",
+              "raw_fragment": "Beschichten_aus_dem_gas-_oder_dampffoermigen_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Chemisches_Beschichten",
+                  "label": "Chemisches Beschichten",
+                  "raw_fragment": "Chemisches_Beschichten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Galvanisches_Beschichten",
+                  "label": "Galvanisches Beschichten",
+                  "raw_fragment": "Galvanisches_Beschichten"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_ionisierten_Zustand",
+              "label": "Beschichten aus dem ionisierten Zustand",
+              "raw_fragment": "Beschichten_aus_dem_ionisierten_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_durch_thermisches_Spritzen",
+                  "label": "Beschichten durch thermisches Spritzen",
+                  "raw_fragment": "Beschichten_durch_thermisches_Spritzen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Elektrostatisches_Beschichten",
+                  "label": "Elektrostatisches Beschichten",
+                  "raw_fragment": "Elektrostatisches_Beschichten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Wirbelsintern",
+                  "label": "Wirbelsintern",
+                  "raw_fragment": "Wirbelsintern"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_koernigen_oder_pulverfoermigen_Zustand",
+              "label": "Beschichten aus dem koernigen oder pulverfoermigen Zustand",
+              "raw_fragment": "Beschichten_aus_dem_koernigen_oder_pulverfoermigen_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Spachteln",
+                  "label": "Spachteln",
+                  "raw_fragment": "Spachteln"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_plastischen_Zustand",
+              "label": "Beschichten aus dem plastischen Zustand",
+              "raw_fragment": "Beschichten_aus_dem_plastischen_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Auftraghartloeten",
+                  "label": "Auftraghartloeten",
+                  "raw_fragment": "Auftraghartloeten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Auftragweichloeten",
+                  "label": "Auftragweichloeten",
+                  "raw_fragment": "Auftragweichloeten"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_durch_Loeten",
+              "label": "Beschichten durch Loeten",
+              "raw_fragment": "Beschichten_durch_Loeten"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Schmelzauftragschweissen",
+                  "label": "Schmelzauftragschweissen",
+                  "raw_fragment": "Schmelzauftragschweissen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_durch_Schweissen",
+              "label": "Beschichten durch Schweissen",
+              "raw_fragment": "Beschichten_durch_Schweissen"
+            }
+          ],
+          "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten",
+          "label": "Beschichten",
+          "raw_fragment": "Beschichten"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Presspassung",
+                  "label": "Fuegen durch Presspassung",
+                  "raw_fragment": "Fuegen_durch_Presspassung"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Klammern",
+                  "label": "Klammern",
+                  "raw_fragment": "Klammern"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Klemmen",
+                  "label": "Klemmen",
+                  "raw_fragment": "Klemmen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Nageln_oder_Verstiften_oder_Einschlagen",
+                  "label": "Nageln oder Verstiften oder Einschlagen",
+                  "raw_fragment": "Nageln_oder_Verstiften_oder_Einschlagen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Schrauben",
+                  "label": "Schrauben",
+                  "raw_fragment": "Schrauben"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Verkeilen",
+                  "label": "Verkeilen",
+                  "raw_fragment": "Verkeilen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Verspannen",
+                  "label": "Verspannen",
+                  "raw_fragment": "Verspannen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#An-_und_Einpressen",
+              "label": "An- und Einpressen",
+              "raw_fragment": "An-_und_Einpressen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Verbindungshartloeten",
+                  "label": "Verbindungshartloeten",
+                  "raw_fragment": "Verbindungshartloeten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Verbindungsweichloeten",
+                  "label": "Verbindungsweichloeten",
+                  "raw_fragment": "Verbindungsweichloeten"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Loeten",
+              "label": "Fuegen durch Loeten",
+              "raw_fragment": "Fuegen_durch_Loeten"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Pressverbindungsschweissen",
+                  "label": "Pressverbindungsschweissen",
+                  "raw_fragment": "Pressverbindungsschweissen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Schmelzverbindungsschweissen",
+                  "label": "Schmelzverbindungsschweissen",
+                  "raw_fragment": "Schmelzverbindungsschweissen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Schweissen",
+              "label": "Fuegen durch Schweissen",
+              "raw_fragment": "Fuegen_durch_Schweissen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Nietverfahren",
+                  "label": "Fuegen durch Nietverfahren",
+                  "raw_fragment": "Fuegen_durch_Nietverfahren"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Umformen_bei_Blech-_Rohr-_und_Profilteilen",
+                  "label": "Fuegen durch Umformen bei Blech- Rohr- und Profilteilen",
+                  "raw_fragment": "Fuegen_durch_Umformen_bei_Blech-_Rohr-_und_Profilteilen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Umformen_drahtfoermiger_Koerper",
+                  "label": "Fuegen durch Umformen drahtfoermiger Koerper",
+                  "raw_fragment": "Fuegen_durch_Umformen_drahtfoermiger_Koerper"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Umformen",
+              "label": "Fuegen durch Umformen",
+              "raw_fragment": "Fuegen_durch_Umformen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Ausgiessen",
+                  "label": "Ausgiessen",
+                  "raw_fragment": "Ausgiessen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Einbetten",
+                  "label": "Einbetten",
+                  "raw_fragment": "Einbetten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Eingalvanisieren",
+                  "label": "Eingalvanisieren",
+                  "raw_fragment": "Eingalvanisieren"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Kitten",
+                  "label": "Kitten",
+                  "raw_fragment": "Kitten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Ummanteln",
+                  "label": "Ummanteln",
+                  "raw_fragment": "Ummanteln"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Vergiessen",
+                  "label": "Vergiessen",
+                  "raw_fragment": "Vergiessen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Urformen",
+              "label": "Fuegen durch Urformen",
+              "raw_fragment": "Fuegen_durch_Urformen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Einfuellen",
+                  "label": "Einfuellen",
+                  "raw_fragment": "Einfuellen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Traenken_oder_Impraegnieren",
+                  "label": "Traenken oder Impraegnieren",
+                  "raw_fragment": "Traenken_oder_Impraegnieren"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuellen",
+              "label": "Fuellen",
+              "raw_fragment": "Fuellen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Kleben_mit_chemisch_abbindenden_Klebstoffen",
+                  "label": "Kleben mit chemisch abbindenden Klebstoffen",
+                  "raw_fragment": "Kleben_mit_chemisch_abbindenden_Klebstoffen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Kleben_mit_physikalisch_abbindenden_Klebstoffen",
+                  "label": "Kleben mit physikalisch abbindenden Klebstoffen",
+                  "raw_fragment": "Kleben_mit_physikalisch_abbindenden_Klebstoffen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Kleben",
+              "label": "Kleben",
+              "raw_fragment": "Kleben"
+            },
+            {
+              "children": [],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Textiles_Fuegen",
+              "label": "Textiles Fuegen",
+              "raw_fragment": "Textiles_Fuegen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Auflegen_oder_Aufsetzen_oder_Schichten",
+                  "label": "Auflegen oder Aufsetzen oder Schichten",
+                  "raw_fragment": "Auflegen_oder_Aufsetzen_oder_Schichten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Einhaengen",
+                  "label": "Einhaengen",
+                  "raw_fragment": "Einhaengen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Einlegen_oder_Einsetzen",
+                  "label": "Einlegen oder Einsetzen",
+                  "raw_fragment": "Einlegen_oder_Einsetzen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Einrenken",
+                  "label": "Einrenken",
+                  "raw_fragment": "Einrenken"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Federnd_Einspreizen",
+                  "label": "Federnd Einspreizen",
+                  "raw_fragment": "Federnd_Einspreizen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Ineinanderschieben",
+                  "label": "Ineinanderschieben",
+                  "raw_fragment": "Ineinanderschieben"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Zusammensetzen",
+              "label": "Zusammensetzen",
+              "raw_fragment": "Zusammensetzen"
+            }
+          ],
+          "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen",
+          "label": "Fuegen",
+          "raw_fragment": "Fuegen"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Bestrahlen",
+              "label": "Bestrahlen",
+              "raw_fragment": "Bestrahlen"
+            },
+            {
+              "children": [],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Magnetisieren",
+              "label": "Magnetisieren",
+              "raw_fragment": "Magnetisieren"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Belichten",
+                  "label": "Belichten",
+                  "raw_fragment": "Belichten"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Photochemische_Verfahren",
+              "label": "Photochemische Verfahren",
+              "raw_fragment": "Photochemische_Verfahren"
+            },
+            {
+              "children": [],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Sintern_oder_Brennen",
+              "label": "Sintern oder Brennen",
+              "raw_fragment": "Sintern_oder_Brennen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Austenitformhaerten",
+                  "label": "Austenitformhaerten",
+                  "raw_fragment": "Austenitformhaerten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Heissisostatisches_Nachverdichten",
+                  "label": "Heissisostatisches Nachverdichten",
+                  "raw_fragment": "Heissisostatisches_Nachverdichten"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Thermomechanisches_Behandeln",
+              "label": "Thermomechanisches Behandeln",
+              "raw_fragment": "Thermomechanisches_Behandeln"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Verfestigen_durch_Schmieden",
+                  "label": "Verfestigen durch Schmieden",
+                  "raw_fragment": "Verfestigen_durch_Schmieden"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Verfestigen_durch_Walzen",
+                  "label": "Verfestigen durch Walzen",
+                  "raw_fragment": "Verfestigen_durch_Walzen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Verfestigen_durch_Ziehen",
+                  "label": "Verfestigen durch Ziehen",
+                  "raw_fragment": "Verfestigen_durch_Ziehen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Verfestigungsstrahlen",
+                  "label": "Verfestigungsstrahlen",
+                  "raw_fragment": "Verfestigungsstrahlen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Verfestigen_durch_Umformen",
+              "label": "Verfestigen durch Umformen",
+              "raw_fragment": "Verfestigen_durch_Umformen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Anlassen_oder_Auslagern",
+                  "label": "Anlassen oder Auslagern",
+                  "raw_fragment": "Anlassen_oder_Auslagern"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Aushaerten",
+                  "label": "Aushaerten",
+                  "raw_fragment": "Aushaerten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Gluehen",
+                  "label": "Gluehen",
+                  "raw_fragment": "Gluehen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Haerten",
+                  "label": "Haerten",
+                  "raw_fragment": "Haerten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Isothermisches_Umwandeln",
+                  "label": "Isothermisches Umwandeln",
+                  "raw_fragment": "Isothermisches_Umwandeln"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Thermochemisches_Behandeln",
+                  "label": "Thermochemisches Behandeln",
+                  "raw_fragment": "Thermochemisches_Behandeln"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Tiefkuehlen",
+                  "label": "Tiefkuehlen",
+                  "raw_fragment": "Tiefkuehlen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Vergueten",
+                  "label": "Vergueten",
+                  "raw_fragment": "Vergueten"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Waermebehandeln",
+              "label": "Waermebehandeln",
+              "raw_fragment": "Waermebehandeln"
+            }
+          ],
+          "id": "http://www.w3id.org/hsu-aut/DIN8580#Stoffeigenschaft_aendern",
+          "label": "Stoffeigenschaft aendern",
+          "raw_fragment": "Stoffeigenschaft_aendern"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Chemisches_Abtragen",
+                  "label": "Chemisches Abtragen",
+                  "raw_fragment": "Chemisches_Abtragen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Elektrochemisches_Abtragen",
+                  "label": "Elektrochemisches Abtragen",
+                  "raw_fragment": "Elektrochemisches_Abtragen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Thermisches_Abtragen",
+                  "label": "Thermisches Abtragen",
+                  "raw_fragment": "Thermisches_Abtragen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Abtragen",
+              "label": "Abtragen",
+              "raw_fragment": "Abtragen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Chemisches_Reinigen",
+                  "label": "Chemisches Reinigen",
+                  "raw_fragment": "Chemisches_Reinigen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Loesemittelreinigen",
+                  "label": "Loesemittelreinigen",
+                  "raw_fragment": "Loesemittelreinigen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Mechanisches_Reinigen",
+                  "label": "Mechanisches Reinigen",
+                  "raw_fragment": "Mechanisches_Reinigen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Reinigungsstrahlen",
+                  "label": "Reinigungsstrahlen",
+                  "raw_fragment": "Reinigungsstrahlen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Stroemungstechnisches_Reinigen",
+                  "label": "Stroemungstechnisches Reinigen",
+                  "raw_fragment": "Stroemungstechnisches_Reinigen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Thermisches_Reinigen",
+                  "label": "Thermisches Reinigen",
+                  "raw_fragment": "Thermisches_Reinigen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Reinigen",
+              "label": "Reinigen",
+              "raw_fragment": "Reinigen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Bohren_oder_Senken_oder_Reiben",
+                  "label": "Bohren oder Senken oder Reiben",
+                  "raw_fragment": "Bohren_oder_Senken_oder_Reiben"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Buerstenspanen",
+                  "label": "Buerstenspanen",
+                  "raw_fragment": "Buerstenspanen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Drehen",
+                  "label": "Drehen",
+                  "raw_fragment": "Drehen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Feilen_oder_Raspeln",
+                  "label": "Feilen oder Raspeln",
+                  "raw_fragment": "Feilen_oder_Raspeln"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Fraesen",
+                  "label": "Fraesen",
+                  "raw_fragment": "Fraesen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Hobeln_oder_Stossen",
+                  "label": "Hobeln oder Stossen",
+                  "raw_fragment": "Hobeln_oder_Stossen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Raeumen",
+                  "label": "Raeumen",
+                  "raw_fragment": "Raeumen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Saegen",
+                  "label": "Saegen",
+                  "raw_fragment": "Saegen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Schaben_oder_Meisseln",
+                  "label": "Schaben oder Meisseln",
+                  "raw_fragment": "Schaben_oder_Meisseln"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Spanen_mit_geometrisch_bestimmten_Schneiden",
+              "label": "Spanen mit geometrisch bestimmten Schneiden",
+              "raw_fragment": "Spanen_mit_geometrisch_bestimmten_Schneiden"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Bandschleifen",
+                  "label": "Bandschleifen",
+                  "raw_fragment": "Bandschleifen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Gleitspanen",
+                  "label": "Gleitspanen",
+                  "raw_fragment": "Gleitspanen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Honen",
+                  "label": "Honen",
+                  "raw_fragment": "Honen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Hubschleifen",
+                  "label": "Hubschleifen",
+                  "raw_fragment": "Hubschleifen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Laeppen",
+                  "label": "Laeppen",
+                  "raw_fragment": "Laeppen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Schleifen_mit_rotierendem_Werkzeug",
+                  "label": "Schleifen mit rotierendem Werkzeug",
+                  "raw_fragment": "Schleifen_mit_rotierendem_Werkzeug"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Strahlspanen",
+                  "label": "Strahlspanen",
+                  "raw_fragment": "Strahlspanen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Spanen_mit_geometrisch_unbestimmten_Schneiden",
+              "label": "Spanen mit geometrisch unbestimmten Schneiden",
+              "raw_fragment": "Spanen_mit_geometrisch_unbestimmten_Schneiden"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Abloeten",
+                  "label": "Abloeten",
+                  "raw_fragment": "Abloeten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Auseinandernehmen",
+                  "label": "Auseinandernehmen",
+                  "raw_fragment": "Auseinandernehmen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Entleeren",
+                  "label": "Entleeren",
+                  "raw_fragment": "Entleeren"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Loesen_kraftschluessiger_Verbindungen",
+                  "label": "Loesen kraftschluessiger Verbindungen",
+                  "raw_fragment": "Loesen_kraftschluessiger_Verbindungen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Loesen_von_Klebeverbindungen",
+                  "label": "Loesen von Klebeverbindungen",
+                  "raw_fragment": "Loesen_von_Klebeverbindungen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Zerlegen_textiler_Verbindungen",
+                  "label": "Zerlegen textiler Verbindungen",
+                  "raw_fragment": "Zerlegen_textiler_Verbindungen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Zerlegen_von_durch_Umformen_gefuegten_Teilen",
+                  "label": "Zerlegen von durch Umformen gefuegten Teilen",
+                  "raw_fragment": "Zerlegen_von_durch_Umformen_gefuegten_Teilen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Zerlegen_von_durch_Urformen_gefuegten_Teilen",
+                  "label": "Zerlegen von durch Urformen gefuegten Teilen",
+                  "raw_fragment": "Zerlegen_von_durch_Urformen_gefuegten_Teilen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Zerlegen",
+              "label": "Zerlegen",
+              "raw_fragment": "Zerlegen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Beissschneiden",
+                  "label": "Beissschneiden",
+                  "raw_fragment": "Beissschneiden"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Brechen",
+                  "label": "Brechen",
+                  "raw_fragment": "Brechen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Messerschneiden",
+                  "label": "Messerschneiden",
+                  "raw_fragment": "Messerschneiden"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Reissen",
+                  "label": "Reissen",
+                  "raw_fragment": "Reissen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Scherschneiden",
+                  "label": "Scherschneiden",
+                  "raw_fragment": "Scherschneiden"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Spalten",
+                  "label": "Spalten",
+                  "raw_fragment": "Spalten"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Zerteilen",
+              "label": "Zerteilen",
+              "raw_fragment": "Zerteilen"
+            }
+          ],
+          "id": "http://www.w3id.org/hsu-aut/DIN8580#Trennen",
+          "label": "Trennen",
+          "raw_fragment": "Trennen"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Biegeumformen_mit_drehender_Werkzeugbewegung",
+                  "label": "Biegeumformen mit drehender Werkzeugbewegung",
+                  "raw_fragment": "Biegeumformen_mit_drehender_Werkzeugbewegung"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Biegeumformen_mit_geradliniger_Werkzeugbewegung",
+                  "label": "Biegeumformen mit geradliniger Werkzeugbewegung",
+                  "raw_fragment": "Biegeumformen_mit_geradliniger_Werkzeugbewegung"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Biegeumformen",
+              "label": "Biegeumformen",
+              "raw_fragment": "Biegeumformen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Druckdruecken",
+                  "label": "Druckdruecken",
+                  "raw_fragment": "Druckdruecken"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Eindruecken",
+                  "label": "Eindruecken",
+                  "raw_fragment": "Eindruecken"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Freiformen",
+                  "label": "Freiformen",
+                  "raw_fragment": "Freiformen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Gesenkformen",
+                  "label": "Gesenkformen",
+                  "raw_fragment": "Gesenkformen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Oberflaechenveredelungsstrahlen",
+                  "label": "Oberflaechenveredelungsstrahlen",
+                  "raw_fragment": "Oberflaechenveredelungsstrahlen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Umformstrahlen",
+                  "label": "Umformstrahlen",
+                  "raw_fragment": "Umformstrahlen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Walzen",
+                  "label": "Walzen",
+                  "raw_fragment": "Walzen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Druckumformen",
+              "label": "Druckumformen",
+              "raw_fragment": "Druckumformen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Verschieben_mit_drehender_Werkzeugbewegung",
+                  "label": "Verschieben mit drehender Werkzeugbewegung",
+                  "raw_fragment": "Verschieben_mit_drehender_Werkzeugbewegung"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Verschieben_mit_geradliniger_Werkzeugbewegung",
+                  "label": "Verschieben mit geradliniger Werkzeugbewegung",
+                  "raw_fragment": "Verschieben_mit_geradliniger_Werkzeugbewegung"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Schubumformen",
+              "label": "Schubumformen",
+              "raw_fragment": "Schubumformen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Druecken",
+                  "label": "Druecken",
+                  "raw_fragment": "Druecken"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Durchziehen",
+                  "label": "Durchziehen",
+                  "raw_fragment": "Durchziehen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Innenhochdruck-Weitstauchen",
+                  "label": "Innenhochdruck-Weitstauchen",
+                  "raw_fragment": "Innenhochdruck-Weitstauchen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Knickbauchen",
+                  "label": "Knickbauchen",
+                  "raw_fragment": "Knickbauchen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Kragenziehen",
+                  "label": "Kragenziehen",
+                  "raw_fragment": "Kragenziehen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Tiefziehen",
+                  "label": "Tiefziehen",
+                  "raw_fragment": "Tiefziehen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Zugdruckumformen",
+              "label": "Zugdruckumformen",
+              "raw_fragment": "Zugdruckumformen"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Laengen",
+                  "label": "Laengen",
+                  "raw_fragment": "Laengen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Tiefen",
+                  "label": "Tiefen",
+                  "raw_fragment": "Tiefen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Weiten",
+                  "label": "Weiten",
+                  "raw_fragment": "Weiten"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Zugumformen",
+              "label": "Zugumformen",
+              "raw_fragment": "Zugumformen"
+            }
+          ],
+          "id": "http://www.w3id.org/hsu-aut/DIN8580#Umformen",
+          "label": "Umformen",
+          "raw_fragment": "Umformen"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Giessen_von_Beton_oder_Gips",
+                  "label": "Giessen von Beton oder Gips",
+                  "raw_fragment": "Giessen_von_Beton_oder_Gips"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Giessen_von_Porzellan_oder_Keramik",
+                  "label": "Giessen von Porzellan oder Keramik",
+                  "raw_fragment": "Giessen_von_Porzellan_oder_Keramik"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_breiigen_Zustand",
+              "label": "Urformen aus dem breiigen Zustand",
+              "raw_fragment": "Urformen_aus_dem_breiigen_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Druckgiessen",
+                  "label": "Druckgiessen",
+                  "raw_fragment": "Druckgiessen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Niederdruckgiessen",
+                  "label": "Niederdruckgiessen",
+                  "raw_fragment": "Niederdruckgiessen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Schaeumen",
+                  "label": "Schaeumen",
+                  "raw_fragment": "Schaeumen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Schleudergiessen",
+                  "label": "Schleudergiessen",
+                  "raw_fragment": "Schleudergiessen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Schwerkraftgiessen",
+                  "label": "Schwerkraftgiessen",
+                  "raw_fragment": "Schwerkraftgiessen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Stranggiessen",
+                  "label": "Stranggiessen",
+                  "raw_fragment": "Stranggiessen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Tauchformen",
+                  "label": "Tauchformen",
+                  "raw_fragment": "Tauchformen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_von_faserverstaerkten_Kunststoffen",
+                  "label": "Urformen von faserverstaerkten Kunststoffen",
+                  "raw_fragment": "Urformen_von_faserverstaerkten_Kunststoffen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Zuechten_von_Kristallen",
+                  "label": "Zuechten von Kristallen",
+                  "raw_fragment": "Zuechten_von_Kristallen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_fluessigen_Zustand",
+              "label": "Urformen aus dem fluessigen Zustand",
+              "raw_fragment": "Urformen_aus_dem_fluessigen_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Abscheiden_aus_der_Dampfphase_in_einer_Form",
+                  "label": "Abscheiden aus der Dampfphase in einer Form",
+                  "raw_fragment": "Abscheiden_aus_der_Dampfphase_in_einer_Form"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_gas-_oder_dampffoermigen_Zustand",
+              "label": "Urformen aus dem gas- oder dampffoermigen Zustand",
+              "raw_fragment": "Urformen_aus_dem_gas-_oder_dampffoermigen_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Elektrolytisches_Abscheiden_in_einer_Form",
+                  "label": "Elektrolytisches Abscheiden in einer Form",
+                  "raw_fragment": "Elektrolytisches_Abscheiden_in_einer_Form"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_ionisierten_Zustand",
+              "label": "Urformen aus dem ionisierten Zustand",
+              "raw_fragment": "Urformen_aus_dem_ionisierten_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Pressen",
+                  "label": "Pressen",
+                  "raw_fragment": "Pressen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Sandformen",
+                  "label": "Sandformen",
+                  "raw_fragment": "Sandformen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_durch_thermisches_Spritzen",
+                  "label": "Urformen durch thermisches Spritzen",
+                  "raw_fragment": "Urformen_durch_thermisches_Spritzen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_koernigen_oder_pulverfoermigen_Zustand",
+              "label": "Urformen aus dem koernigen oder pulverfoermigen Zustand",
+              "raw_fragment": "Urformen_aus_dem_koernigen_oder_pulverfoermigen_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Blasformen",
+                  "label": "Blasformen",
+                  "raw_fragment": "Blasformen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Kalandrieren",
+                  "label": "Kalandrieren",
+                  "raw_fragment": "Kalandrieren"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Modellieren",
+                  "label": "Modellieren",
+                  "raw_fragment": "Modellieren"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Pressformen",
+                  "label": "Pressformen",
+                  "raw_fragment": "Pressformen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Spritzgiessen",
+                  "label": "Spritzgiessen",
+                  "raw_fragment": "Spritzgiessen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Spritzpressen",
+                  "label": "Spritzpressen",
+                  "raw_fragment": "Spritzpressen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Strangpressen",
+                  "label": "Strangpressen",
+                  "raw_fragment": "Strangpressen"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Ziehformen",
+                  "label": "Ziehformen",
+                  "raw_fragment": "Ziehformen"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_plastischen_Zustand",
+              "label": "Urformen aus dem plastischen Zustand",
+              "raw_fragment": "Urformen_aus_dem_plastischen_Zustand"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Herstellung_von_Faserplatten",
+                  "label": "Herstellung von Faserplatten",
+                  "raw_fragment": "Herstellung_von_Faserplatten"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Herstellung_von_Papier_und_Pappe",
+                  "label": "Herstellung von Papier und Pappe",
+                  "raw_fragment": "Herstellung_von_Papier_und_Pappe"
+                },
+                {
+                  "children": [],
+                  "id": "http://www.w3id.org/hsu-aut/DIN8580#Herstellung_von_Spanplatten",
+                  "label": "Herstellung von Spanplatten",
+                  "raw_fragment": "Herstellung_von_Spanplatten"
+                }
+              ],
+              "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_span-_oder_faserfoermigen_Zustand",
+              "label": "Urformen aus dem span- oder faserfoermigen Zustand",
+              "raw_fragment": "Urformen_aus_dem_span-_oder_faserfoermigen_Zustand"
+            }
+          ],
+          "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen",
+          "label": "Urformen",
+          "raw_fragment": "Urformen"
+        }
+      ],
+      "id": "http://www.w3id.org/hsu-aut/DIN8580#Fertigungsverfahren",
+      "label": "Fertigungsverfahren",
+      "raw_fragment": "Fertigungsverfahren"
+    }
+  ],
+  "source": "artifacts/DIN8580.owl"
+}

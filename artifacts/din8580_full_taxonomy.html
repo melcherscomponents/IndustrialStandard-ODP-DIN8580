@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DIN8580 Full Taxonomy</title>
+  <style>
+    :root {
+      --bg: #f4f1eb;
+      --panel: #fffdf8;
+      --ink: #1f2a33;
+      --line: #9ca8b2;
+      --accent: #005f73;
+      --accent-2: #9b2226;
+      --muted: #65727d;
+      --node: #0b4f6c;
+      --node-highlight: #bb3e03;
+    }
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: 'Avenir Next', 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top right, #fffdf8, var(--bg));
+      color: var(--ink);
+    }
+    .layout {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      height: 100vh;
+    }
+    .header {
+      padding: 14px 18px 8px;
+      background: var(--panel);
+      border-bottom: 1px solid #e5ddd1;
+    }
+    .title {
+      margin: 0;
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+    }
+    .meta {
+      margin-top: 4px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--panel);
+      border-bottom: 1px solid #e5ddd1;
+    }
+    input[type="search"] {
+      min-width: 280px;
+      flex: 1;
+      border: 1px solid #c7c0b6;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 0.95rem;
+      background: #ffffff;
+      color: var(--ink);
+    }
+    button {
+      border: 1px solid #0f5969;
+      background: var(--accent);
+      color: #ffffff;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: #ffffff;
+      color: var(--accent);
+      border-color: #7d8d99;
+    }
+    button:hover {
+      filter: brightness(0.95);
+    }
+    #status {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-left: auto;
+    }
+    #chart {
+      position: relative;
+      overflow: hidden;
+    }
+    #tooltip {
+      position: absolute;
+      pointer-events: none;
+      padding: 6px 8px;
+      background: rgba(31, 42, 51, 0.95);
+      color: #fff;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      transform: translate(10px, 10px);
+      opacity: 0;
+      transition: opacity 120ms ease;
+      max-width: min(60ch, 80vw);
+      z-index: 10;
+    }
+    .node circle {
+      fill: var(--node);
+      stroke: #ffffff;
+      stroke-width: 1.2px;
+    }
+    .node text {
+      font-size: 12px;
+      fill: var(--ink);
+      dominant-baseline: central;
+    }
+    .node .label-bg {
+      fill: rgba(255, 255, 255, 0.94);
+      stroke: #d9d2c7;
+      stroke-width: 0.8px;
+      rx: 3;
+      ry: 3;
+    }
+    .node.match circle {
+      fill: var(--node-highlight);
+      r: 6;
+    }
+    .node.match text {
+      fill: var(--accent-2);
+      font-weight: 700;
+    }
+    .link {
+      fill: none;
+      stroke: var(--line);
+      stroke-opacity: 0.8;
+      stroke-width: 1.2px;
+    }
+    .link.match-path {
+      stroke: var(--accent-2);
+      stroke-width: 1.8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div class="header">
+      <h1 class="title">DIN8580 Interactive Full Taxonomy</h1>
+      <div class="meta" id="meta"></div>
+    </div>
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search by label or raw fragment..." />
+      <button id="expandAll">Expand all</button>
+      <button id="collapseAll" class="secondary">Collapse all</button>
+      <button id="resetView" class="secondary">Reset view</button>
+      <span id="status"></span>
+    </div>
+    <div id="chart">
+      <div id="tooltip"></div>
+    </div>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    const graphData = {"edge_count": 198, "node_count": 199, "roots": [{"children": [{"children": [{"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Schwerkraftgiessen", "label": "Schwerkraftgiessen", "level_number": "1.1.1", "level_type": "Untergruppe", "raw_fragment": "Schwerkraftgiessen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Druckgiessen", "label": "Druckgiessen", "level_number": "1.1.2", "level_type": "Untergruppe", "raw_fragment": "Druckgiessen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Niederdruckgiessen", "label": "Niederdruckgiessen", "level_number": "1.1.3", "level_type": "Untergruppe", "raw_fragment": "Niederdruckgiessen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Schleudergiessen", "label": "Schleudergiessen", "level_number": "1.1.4", "level_type": "Untergruppe", "raw_fragment": "Schleudergiessen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Stranggiessen", "label": "Stranggiessen", "level_number": "1.1.5", "level_type": "Untergruppe", "raw_fragment": "Stranggiessen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Schaeumen", "label": "Schaeumen", "level_number": "1.1.6", "level_type": "Untergruppe", "raw_fragment": "Schaeumen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Tauchformen", "label": "Tauchformen", "level_number": "1.1.7", "level_type": "Untergruppe", "raw_fragment": "Tauchformen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_von_faserverstaerkten_Kunststoffen", "label": "Urformen von faserverstaerkten Kunststoffen", "level_number": "1.1.8", "level_type": "Untergruppe", "raw_fragment": "Urformen_von_faserverstaerkten_Kunststoffen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Zuechten_von_Kristallen", "label": "Zuechten von Kristallen", "level_number": "1.1.9", "level_type": "Untergruppe", "raw_fragment": "Zuechten_von_Kristallen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_fluessigen_Zustand", "label": "Urformen aus dem fluessigen Zustand", "level_number": "1.1", "level_type": "Gruppe", "raw_fragment": "Urformen_aus_dem_fluessigen_Zustand"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Pressformen", "label": "Pressformen", "level_number": "1.2.1", "level_type": "Untergruppe", "raw_fragment": "Pressformen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Spritzgiessen", "label": "Spritzgiessen", "level_number": "1.2.2", "level_type": "Untergruppe", "raw_fragment": "Spritzgiessen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Spritzpressen", "label": "Spritzpressen", "level_number": "1.2.3", "level_type": "Untergruppe", "raw_fragment": "Spritzpressen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Strangpressen", "label": "Strangpressen", "level_number": "1.2.4", "level_type": "Untergruppe", "raw_fragment": "Strangpressen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Ziehformen", "label": "Ziehformen", "level_number": "1.2.5", "level_type": "Untergruppe", "raw_fragment": "Ziehformen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Kalandrieren", "label": "Kalandrieren", "level_number": "1.2.6", "level_type": "Untergruppe", "raw_fragment": "Kalandrieren"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Blasformen", "label": "Blasformen", "level_number": "1.2.7", "level_type": "Untergruppe", "raw_fragment": "Blasformen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Modellieren", "label": "Modellieren", "level_number": "1.2.8", "level_type": "Untergruppe", "raw_fragment": "Modellieren"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_plastischen_Zustand", "label": "Urformen aus dem plastischen Zustand", "level_number": "1.2", "level_type": "Gruppe", "raw_fragment": "Urformen_aus_dem_plastischen_Zustand"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Giessen_von_Beton_oder_Gips", "label": "Giessen von Beton oder Gips", "level_number": "1.3.1", "level_type": "Untergruppe", "raw_fragment": "Giessen_von_Beton_oder_Gips"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Giessen_von_Porzellan_oder_Keramik", "label": "Giessen von Porzellan oder Keramik", "level_number": "1.3.2", "level_type": "Untergruppe", "raw_fragment": "Giessen_von_Porzellan_oder_Keramik"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_breiigen_Zustand", "label": "Urformen aus dem breiigen Zustand", "level_number": "1.3", "level_type": "Gruppe", "raw_fragment": "Urformen_aus_dem_breiigen_Zustand"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Pressen", "label": "Pressen", "level_number": "1.4.1", "level_type": "Untergruppe", "raw_fragment": "Pressen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Sandformen", "label": "Sandformen", "level_number": "1.4.2", "level_type": "Untergruppe", "raw_fragment": "Sandformen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_durch_thermisches_Spritzen", "label": "Urformen durch thermisches Spritzen", "level_number": "1.4.3", "level_type": "Untergruppe", "raw_fragment": "Urformen_durch_thermisches_Spritzen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_koernigen_oder_pulverfoermigen_Zustand", "label": "Urformen aus dem koernigen oder pulverfoermigen Zustand", "level_number": "1.4", "level_type": "Gruppe", "raw_fragment": "Urformen_aus_dem_koernigen_oder_pulverfoermigen_Zustand"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Herstellung_von_Spanplatten", "label": "Herstellung von Spanplatten", "level_number": "1.5.1", "level_type": "Untergruppe", "raw_fragment": "Herstellung_von_Spanplatten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Herstellung_von_Faserplatten", "label": "Herstellung von Faserplatten", "level_number": "1.5.2", "level_type": "Untergruppe", "raw_fragment": "Herstellung_von_Faserplatten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Herstellung_von_Papier_und_Pappe", "label": "Herstellung von Papier und Pappe", "level_number": "1.5.3", "level_type": "Untergruppe", "raw_fragment": "Herstellung_von_Papier_und_Pappe"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_span-_oder_faserfoermigen_Zustand", "label": "Urformen aus dem span- oder faserfoermigen Zustand", "level_number": "1.5", "level_type": "Gruppe", "raw_fragment": "Urformen_aus_dem_span-_oder_faserfoermigen_Zustand"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Abscheiden_aus_der_Dampfphase_in_einer_Form", "label": "Abscheiden aus der Dampfphase in einer Form", "level_number": "1.8.1", "level_type": "Untergruppe", "raw_fragment": "Abscheiden_aus_der_Dampfphase_in_einer_Form"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_gas-_oder_dampffoermigen_Zustand", "label": "Urformen aus dem gas- oder dampffoermigen Zustand", "level_number": "1.8", "level_type": "Gruppe", "raw_fragment": "Urformen_aus_dem_gas-_oder_dampffoermigen_Zustand"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Elektrolytisches_Abscheiden_in_einer_Form", "label": "Elektrolytisches Abscheiden in einer Form", "level_number": "1.9.1", "level_type": "Untergruppe", "raw_fragment": "Elektrolytisches_Abscheiden_in_einer_Form"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen_aus_dem_ionisierten_Zustand", "label": "Urformen aus dem ionisierten Zustand", "level_number": "1.9", "level_type": "Gruppe", "raw_fragment": "Urformen_aus_dem_ionisierten_Zustand"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Urformen", "label": "Urformen", "level_number": "1", "level_type": "Hauptgruppe", "raw_fragment": "Urformen"}, {"children": [{"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Walzen", "label": "Walzen", "level_number": "2.1.1", "level_type": "Untergruppe", "raw_fragment": "Walzen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Freiformen", "label": "Freiformen", "level_number": "2.1.2", "level_type": "Untergruppe", "raw_fragment": "Freiformen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Gesenkformen", "label": "Gesenkformen", "level_number": "2.1.3", "level_type": "Untergruppe", "raw_fragment": "Gesenkformen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Eindruecken", "label": "Eindruecken", "level_number": "2.1.4", "level_type": "Untergruppe", "raw_fragment": "Eindruecken"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Druckdruecken", "label": "Druckdruecken", "level_number": "2.1.5", "level_type": "Untergruppe", "raw_fragment": "Druckdruecken"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Umformstrahlen", "label": "Umformstrahlen", "level_number": "2.1.6", "level_type": "Untergruppe", "raw_fragment": "Umformstrahlen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Oberflaechenveredelungsstrahlen", "label": "Oberflaechenveredelungsstrahlen", "level_number": "2.1.7", "level_type": "Untergruppe", "raw_fragment": "Oberflaechenveredelungsstrahlen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Druckumformen", "label": "Druckumformen", "level_number": "2.1", "level_type": "Gruppe", "raw_fragment": "Druckumformen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Durchziehen", "label": "Durchziehen", "level_number": "2.2.1", "level_type": "Untergruppe", "raw_fragment": "Durchziehen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Tiefziehen", "label": "Tiefziehen", "level_number": "2.2.2", "level_type": "Untergruppe", "raw_fragment": "Tiefziehen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Druecken", "label": "Druecken", "level_number": "2.2.3", "level_type": "Untergruppe", "raw_fragment": "Druecken"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Kragenziehen", "label": "Kragenziehen", "level_number": "2.2.4", "level_type": "Untergruppe", "raw_fragment": "Kragenziehen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Knickbauchen", "label": "Knickbauchen", "level_number": "2.2.5", "level_type": "Untergruppe", "raw_fragment": "Knickbauchen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Innenhochdruck-Weitstauchen", "label": "Innenhochdruck-Weitstauchen", "level_number": "2.2.6", "level_type": "Untergruppe", "raw_fragment": "Innenhochdruck-Weitstauchen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Zugdruckumformen", "label": "Zugdruckumformen", "level_number": "2.2", "level_type": "Gruppe", "raw_fragment": "Zugdruckumformen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Laengen", "label": "Laengen", "level_number": "2.3.1", "level_type": "Untergruppe", "raw_fragment": "Laengen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Weiten", "label": "Weiten", "level_number": "2.3.2", "level_type": "Untergruppe", "raw_fragment": "Weiten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Tiefen", "label": "Tiefen", "level_number": "2.3.3", "level_type": "Untergruppe", "raw_fragment": "Tiefen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Zugumformen", "label": "Zugumformen", "level_number": "2.3", "level_type": "Gruppe", "raw_fragment": "Zugumformen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Biegeumformen_mit_geradliniger_Werkzeugbewegung", "label": "Biegeumformen mit geradliniger Werkzeugbewegung", "level_number": "2.4.1", "level_type": "Untergruppe", "raw_fragment": "Biegeumformen_mit_geradliniger_Werkzeugbewegung"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Biegeumformen_mit_drehender_Werkzeugbewegung", "label": "Biegeumformen mit drehender Werkzeugbewegung", "level_number": "2.4.2", "level_type": "Untergruppe", "raw_fragment": "Biegeumformen_mit_drehender_Werkzeugbewegung"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Biegeumformen", "label": "Biegeumformen", "level_number": "2.4", "level_type": "Gruppe", "raw_fragment": "Biegeumformen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Verschieben_mit_geradliniger_Werkzeugbewegung", "label": "Verschieben mit geradliniger Werkzeugbewegung", "level_number": "2.5.1", "level_type": "Untergruppe", "raw_fragment": "Verschieben_mit_geradliniger_Werkzeugbewegung"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Verschieben_mit_drehender_Werkzeugbewegung", "label": "Verschieben mit drehender Werkzeugbewegung", "level_number": "2.5.2", "level_type": "Untergruppe", "raw_fragment": "Verschieben_mit_drehender_Werkzeugbewegung"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Schubumformen", "label": "Schubumformen", "level_number": "2.5", "level_type": "Gruppe", "raw_fragment": "Schubumformen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Umformen", "label": "Umformen", "level_number": "2", "level_type": "Hauptgruppe", "raw_fragment": "Umformen"}, {"children": [{"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Scherschneiden", "label": "Scherschneiden", "level_number": "3.1.1", "level_type": "Untergruppe", "raw_fragment": "Scherschneiden"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Messerschneiden", "label": "Messerschneiden", "level_number": "3.1.2", "level_type": "Untergruppe", "raw_fragment": "Messerschneiden"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beissschneiden", "label": "Beissschneiden", "level_number": "3.1.3", "level_type": "Untergruppe", "raw_fragment": "Beissschneiden"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Spalten", "label": "Spalten", "level_number": "3.1.4", "level_type": "Untergruppe", "raw_fragment": "Spalten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Reissen", "label": "Reissen", "level_number": "3.1.5", "level_type": "Untergruppe", "raw_fragment": "Reissen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Brechen", "label": "Brechen", "level_number": "3.1.6", "level_type": "Untergruppe", "raw_fragment": "Brechen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Zerteilen", "label": "Zerteilen", "level_number": "3.1", "level_type": "Gruppe", "raw_fragment": "Zerteilen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Drehen", "label": "Drehen", "level_number": "3.2.1", "level_type": "Untergruppe", "raw_fragment": "Drehen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Bohren_oder_Senken_oder_Reiben", "label": "Bohren oder Senken oder Reiben", "level_number": "3.2.2", "level_type": "Untergruppe", "raw_fragment": "Bohren_oder_Senken_oder_Reiben"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fraesen", "label": "Fraesen", "level_number": "3.2.3", "level_type": "Untergruppe", "raw_fragment": "Fraesen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Hobeln_oder_Stossen", "label": "Hobeln oder Stossen", "level_number": "3.2.4", "level_type": "Untergruppe", "raw_fragment": "Hobeln_oder_Stossen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Raeumen", "label": "Raeumen", "level_number": "3.2.5", "level_type": "Untergruppe", "raw_fragment": "Raeumen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Saegen", "label": "Saegen", "level_number": "3.2.6", "level_type": "Untergruppe", "raw_fragment": "Saegen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Feilen_oder_Raspeln", "label": "Feilen oder Raspeln", "level_number": "3.2.7", "level_type": "Untergruppe", "raw_fragment": "Feilen_oder_Raspeln"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Buerstenspanen", "label": "Buerstenspanen", "level_number": "3.2.8", "level_type": "Untergruppe", "raw_fragment": "Buerstenspanen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Schaben_oder_Meisseln", "label": "Schaben oder Meisseln", "level_number": "3.2.9", "level_type": "Untergruppe", "raw_fragment": "Schaben_oder_Meisseln"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Spanen_mit_geometrisch_bestimmten_Schneiden", "label": "Spanen mit geometrisch bestimmten Schneiden", "level_number": "3.2", "level_type": "Gruppe", "raw_fragment": "Spanen_mit_geometrisch_bestimmten_Schneiden"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Schleifen_mit_rotierendem_Werkzeug", "label": "Schleifen mit rotierendem Werkzeug", "level_number": "3.3.1", "level_type": "Untergruppe", "raw_fragment": "Schleifen_mit_rotierendem_Werkzeug"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Bandschleifen", "label": "Bandschleifen", "level_number": "3.3.2", "level_type": "Untergruppe", "raw_fragment": "Bandschleifen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Hubschleifen", "label": "Hubschleifen", "level_number": "3.3.3", "level_type": "Untergruppe", "raw_fragment": "Hubschleifen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Honen", "label": "Honen", "level_number": "3.3.4", "level_type": "Untergruppe", "raw_fragment": "Honen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Laeppen", "label": "Laeppen", "level_number": "3.3.5", "level_type": "Untergruppe", "raw_fragment": "Laeppen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Strahlspanen", "label": "Strahlspanen", "level_number": "3.3.6", "level_type": "Untergruppe", "raw_fragment": "Strahlspanen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Gleitspanen", "label": "Gleitspanen", "level_number": "3.3.7", "level_type": "Untergruppe", "raw_fragment": "Gleitspanen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Spanen_mit_geometrisch_unbestimmten_Schneiden", "label": "Spanen mit geometrisch unbestimmten Schneiden", "level_number": "3.3", "level_type": "Gruppe", "raw_fragment": "Spanen_mit_geometrisch_unbestimmten_Schneiden"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Thermisches_Abtragen", "label": "Thermisches Abtragen", "level_number": "3.4.1", "level_type": "Untergruppe", "raw_fragment": "Thermisches_Abtragen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Chemisches_Abtragen", "label": "Chemisches Abtragen", "level_number": "3.4.2", "level_type": "Untergruppe", "raw_fragment": "Chemisches_Abtragen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Elektrochemisches_Abtragen", "label": "Elektrochemisches Abtragen", "level_number": "3.4.3", "level_type": "Untergruppe", "raw_fragment": "Elektrochemisches_Abtragen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Abtragen", "label": "Abtragen", "level_number": "3.4", "level_type": "Gruppe", "raw_fragment": "Abtragen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Auseinandernehmen", "label": "Auseinandernehmen", "level_number": "3.5.1", "level_type": "Untergruppe", "raw_fragment": "Auseinandernehmen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Entleeren", "label": "Entleeren", "level_number": "3.5.2", "level_type": "Untergruppe", "raw_fragment": "Entleeren"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Loesen_kraftschluessiger_Verbindungen", "label": "Loesen kraftschluessiger Verbindungen", "level_number": "3.5.3", "level_type": "Untergruppe", "raw_fragment": "Loesen_kraftschluessiger_Verbindungen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Zerlegen_von_durch_Urformen_gefuegten_Teilen", "label": "Zerlegen von durch Urformen gefuegten Teilen", "level_number": "3.5.4", "level_type": "Untergruppe", "raw_fragment": "Zerlegen_von_durch_Urformen_gefuegten_Teilen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Zerlegen_von_durch_Umformen_gefuegten_Teilen", "label": "Zerlegen von durch Umformen gefuegten Teilen", "level_number": "3.5.5", "level_type": "Untergruppe", "raw_fragment": "Zerlegen_von_durch_Umformen_gefuegten_Teilen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Abloeten", "label": "Abloeten", "level_number": "3.5.7", "level_type": "Untergruppe", "raw_fragment": "Abloeten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Loesen_von_Klebeverbindungen", "label": "Loesen von Klebeverbindungen", "level_number": "3.5.8", "level_type": "Untergruppe", "raw_fragment": "Loesen_von_Klebeverbindungen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Zerlegen_textiler_Verbindungen", "label": "Zerlegen textiler Verbindungen", "level_number": "3.5.9", "level_type": "Untergruppe", "raw_fragment": "Zerlegen_textiler_Verbindungen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Zerlegen", "label": "Zerlegen", "level_number": "3.5", "level_type": "Gruppe", "raw_fragment": "Zerlegen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Reinigungsstrahlen", "label": "Reinigungsstrahlen", "level_number": "3.6.1", "level_type": "Untergruppe", "raw_fragment": "Reinigungsstrahlen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Mechanisches_Reinigen", "label": "Mechanisches Reinigen", "level_number": "3.6.2", "level_type": "Untergruppe", "raw_fragment": "Mechanisches_Reinigen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Stroemungstechnisches_Reinigen", "label": "Stroemungstechnisches Reinigen", "level_number": "3.6.3", "level_type": "Untergruppe", "raw_fragment": "Stroemungstechnisches_Reinigen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Loesemittelreinigen", "label": "Loesemittelreinigen", "level_number": "3.6.4", "level_type": "Untergruppe", "raw_fragment": "Loesemittelreinigen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Chemisches_Reinigen", "label": "Chemisches Reinigen", "level_number": "3.6.5", "level_type": "Untergruppe", "raw_fragment": "Chemisches_Reinigen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Thermisches_Reinigen", "label": "Thermisches Reinigen", "level_number": "3.6.6", "level_type": "Untergruppe", "raw_fragment": "Thermisches_Reinigen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Reinigen", "label": "Reinigen", "level_number": "3.6", "level_type": "Gruppe", "raw_fragment": "Reinigen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Trennen", "label": "Trennen", "level_number": "3", "level_type": "Hauptgruppe", "raw_fragment": "Trennen"}, {"children": [{"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Auflegen_oder_Aufsetzen_oder_Schichten", "label": "Auflegen oder Aufsetzen oder Schichten", "level_number": "4.1.1", "level_type": "Untergruppe", "raw_fragment": "Auflegen_oder_Aufsetzen_oder_Schichten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Einlegen_oder_Einsetzen", "label": "Einlegen oder Einsetzen", "level_number": "4.1.2", "level_type": "Untergruppe", "raw_fragment": "Einlegen_oder_Einsetzen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Ineinanderschieben", "label": "Ineinanderschieben", "level_number": "4.1.3", "level_type": "Untergruppe", "raw_fragment": "Ineinanderschieben"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Einhaengen", "label": "Einhaengen", "level_number": "4.1.4", "level_type": "Untergruppe", "raw_fragment": "Einhaengen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Einrenken", "label": "Einrenken", "level_number": "4.1.5", "level_type": "Untergruppe", "raw_fragment": "Einrenken"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Federnd_Einspreizen", "label": "Federnd Einspreizen", "level_number": "4.1.6", "level_type": "Untergruppe", "raw_fragment": "Federnd_Einspreizen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Zusammensetzen", "label": "Zusammensetzen", "level_number": "4.1", "level_type": "Gruppe", "raw_fragment": "Zusammensetzen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Einfuellen", "label": "Einfuellen", "level_number": "4.2.1", "level_type": "Untergruppe", "raw_fragment": "Einfuellen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Traenken_oder_Impraegnieren", "label": "Traenken oder Impraegnieren", "level_number": "4.2.2", "level_type": "Untergruppe", "raw_fragment": "Traenken_oder_Impraegnieren"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuellen", "label": "Fuellen", "level_number": "4.2", "level_type": "Gruppe", "raw_fragment": "Fuellen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Schrauben", "label": "Schrauben", "level_number": "4.3.1", "level_type": "Untergruppe", "raw_fragment": "Schrauben"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Klemmen", "label": "Klemmen", "level_number": "4.3.2", "level_type": "Untergruppe", "raw_fragment": "Klemmen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Klammern", "label": "Klammern", "level_number": "4.3.3", "level_type": "Untergruppe", "raw_fragment": "Klammern"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Presspassung", "label": "Fuegen durch Presspassung", "level_number": "4.3.4", "level_type": "Untergruppe", "raw_fragment": "Fuegen_durch_Presspassung"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Nageln_oder_Verstiften_oder_Einschlagen", "label": "Nageln oder Verstiften oder Einschlagen", "level_number": "4.3.5", "level_type": "Untergruppe", "raw_fragment": "Nageln_oder_Verstiften_oder_Einschlagen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Verkeilen", "label": "Verkeilen", "level_number": "4.3.6", "level_type": "Untergruppe", "raw_fragment": "Verkeilen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Verspannen", "label": "Verspannen", "level_number": "4.3.7", "level_type": "Untergruppe", "raw_fragment": "Verspannen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#An-_und_Einpressen", "label": "An- und Einpressen", "level_number": "4.3", "level_type": "Gruppe", "raw_fragment": "An-_und_Einpressen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Ausgiessen", "label": "Ausgiessen", "level_number": "4.4.1", "level_type": "Untergruppe", "raw_fragment": "Ausgiessen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Einbetten", "label": "Einbetten", "level_number": "4.4.2", "level_type": "Untergruppe", "raw_fragment": "Einbetten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Vergiessen", "label": "Vergiessen", "level_number": "4.4.3", "level_type": "Untergruppe", "raw_fragment": "Vergiessen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Eingalvanisieren", "label": "Eingalvanisieren", "level_number": "4.4.4", "level_type": "Untergruppe", "raw_fragment": "Eingalvanisieren"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Ummanteln", "label": "Ummanteln", "level_number": "4.4.5", "level_type": "Untergruppe", "raw_fragment": "Ummanteln"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Kitten", "label": "Kitten", "level_number": "4.4.6", "level_type": "Untergruppe", "raw_fragment": "Kitten"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Urformen", "label": "Fuegen durch Urformen", "level_number": "4.4", "level_type": "Gruppe", "raw_fragment": "Fuegen_durch_Urformen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Umformen_drahtfoermiger_Koerper", "label": "Fuegen durch Umformen drahtfoermiger Koerper", "level_number": "4.5.1", "level_type": "Untergruppe", "raw_fragment": "Fuegen_durch_Umformen_drahtfoermiger_Koerper"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Umformen_bei_Blech-_Rohr-_und_Profilteilen", "label": "Fuegen durch Umformen bei Blech- Rohr- und Profilteilen", "level_number": "4.5.2", "level_type": "Untergruppe", "raw_fragment": "Fuegen_durch_Umformen_bei_Blech-_Rohr-_und_Profilteilen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Nietverfahren", "label": "Fuegen durch Nietverfahren", "level_number": "4.5.3", "level_type": "Untergruppe", "raw_fragment": "Fuegen_durch_Nietverfahren"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Umformen", "label": "Fuegen durch Umformen", "level_number": "4.5", "level_type": "Gruppe", "raw_fragment": "Fuegen_durch_Umformen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Pressverbindungsschweissen", "label": "Pressverbindungsschweissen", "level_number": "4.6.1", "level_type": "Untergruppe", "raw_fragment": "Pressverbindungsschweissen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Schmelzverbindungsschweissen", "label": "Schmelzverbindungsschweissen", "level_number": "4.6.2", "level_type": "Untergruppe", "raw_fragment": "Schmelzverbindungsschweissen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Schweissen", "label": "Fuegen durch Schweissen", "level_number": "4.6", "level_type": "Gruppe", "raw_fragment": "Fuegen_durch_Schweissen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Verbindungsweichloeten", "label": "Verbindungsweichloeten", "level_number": "4.7.1", "level_type": "Untergruppe", "raw_fragment": "Verbindungsweichloeten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Verbindungshartloeten", "label": "Verbindungshartloeten", "level_number": "4.7.2", "level_type": "Untergruppe", "raw_fragment": "Verbindungshartloeten"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen_durch_Loeten", "label": "Fuegen durch Loeten", "level_number": "4.7", "level_type": "Gruppe", "raw_fragment": "Fuegen_durch_Loeten"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Kleben_mit_physikalisch_abbindenden_Klebstoffen", "label": "Kleben mit physikalisch abbindenden Klebstoffen", "level_number": "4.8.1", "level_type": "Untergruppe", "raw_fragment": "Kleben_mit_physikalisch_abbindenden_Klebstoffen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Kleben_mit_chemisch_abbindenden_Klebstoffen", "label": "Kleben mit chemisch abbindenden Klebstoffen", "level_number": "4.8.2", "level_type": "Untergruppe", "raw_fragment": "Kleben_mit_chemisch_abbindenden_Klebstoffen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Kleben", "label": "Kleben", "level_number": "4.8", "level_type": "Gruppe", "raw_fragment": "Kleben"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Textiles_Fuegen", "label": "Textiles Fuegen", "level_number": "4.9", "level_type": "Gruppe", "raw_fragment": "Textiles_Fuegen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fuegen", "label": "Fuegen", "level_number": "4", "level_type": "Hauptgruppe", "raw_fragment": "Fuegen"}, {"children": [{"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Schmelztauchen", "label": "Schmelztauchen", "level_number": "5.1.1", "level_type": "Untergruppe", "raw_fragment": "Schmelztauchen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Anstreichen_oder_Lackieren", "label": "Anstreichen oder Lackieren", "level_number": "5.1.2", "level_type": "Untergruppe", "raw_fragment": "Anstreichen_oder_Lackieren"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Faerben", "label": "Faerben", "level_number": "5.1.3", "level_type": "Untergruppe", "raw_fragment": "Faerben"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Emaillieren_oder_Glasieren", "label": "Emaillieren oder Glasieren", "level_number": "5.1.4", "level_type": "Untergruppe", "raw_fragment": "Emaillieren_oder_Glasieren"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_durch_Giessen", "label": "Beschichten durch Giessen", "level_number": "5.1.5", "level_type": "Untergruppe", "raw_fragment": "Beschichten_durch_Giessen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Drucken_oder_Bedrucken", "label": "Drucken oder Bedrucken", "level_number": "5.1.6", "level_type": "Untergruppe", "raw_fragment": "Drucken_oder_Bedrucken"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschriften", "label": "Beschriften", "level_number": "5.1.7", "level_type": "Untergruppe", "raw_fragment": "Beschriften"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_fluessigen_Zustand", "label": "Beschichten aus dem fluessigen Zustand", "level_number": "5.1", "level_type": "Gruppe", "raw_fragment": "Beschichten_aus_dem_fluessigen_Zustand"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Spachteln", "label": "Spachteln", "level_number": "5.2.1", "level_type": "Untergruppe", "raw_fragment": "Spachteln"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_plastischen_Zustand", "label": "Beschichten aus dem plastischen Zustand", "level_number": "5.2", "level_type": "Gruppe", "raw_fragment": "Beschichten_aus_dem_plastischen_Zustand"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Putzen_oder_Verputzen", "label": "Putzen oder Verputzen", "level_number": "5.3.1", "level_type": "Untergruppe", "raw_fragment": "Putzen_oder_Verputzen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_breiigen_Zustand", "label": "Beschichten aus dem breiigen Zustand", "level_number": "5.3", "level_type": "Gruppe", "raw_fragment": "Beschichten_aus_dem_breiigen_Zustand"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Wirbelsintern", "label": "Wirbelsintern", "level_number": "5.4.1", "level_type": "Untergruppe", "raw_fragment": "Wirbelsintern"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Elektrostatisches_Beschichten", "label": "Elektrostatisches Beschichten", "level_number": "5.4.2", "level_type": "Untergruppe", "raw_fragment": "Elektrostatisches_Beschichten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_durch_thermisches_Spritzen", "label": "Beschichten durch thermisches Spritzen", "level_number": "5.4.3", "level_type": "Untergruppe", "raw_fragment": "Beschichten_durch_thermisches_Spritzen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_koernigen_oder_pulverfoermigen_Zustand", "label": "Beschichten aus dem koernigen oder pulverfoermigen Zustand", "level_number": "5.4", "level_type": "Gruppe", "raw_fragment": "Beschichten_aus_dem_koernigen_oder_pulverfoermigen_Zustand"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Schmelzauftragschweissen", "label": "Schmelzauftragschweissen", "level_number": "5.6.1", "level_type": "Untergruppe", "raw_fragment": "Schmelzauftragschweissen"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_durch_Schweissen", "label": "Beschichten durch Schweissen", "level_number": "5.6", "level_type": "Gruppe", "raw_fragment": "Beschichten_durch_Schweissen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Auftragweichloeten", "label": "Auftragweichloeten", "level_number": "5.7.1", "level_type": "Untergruppe", "raw_fragment": "Auftragweichloeten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Auftraghartloeten", "label": "Auftraghartloeten", "level_number": "5.7.2", "level_type": "Untergruppe", "raw_fragment": "Auftraghartloeten"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_durch_Loeten", "label": "Beschichten durch Loeten", "level_number": "5.7", "level_type": "Gruppe", "raw_fragment": "Beschichten_durch_Loeten"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Vakuumbedampfen", "label": "Vakuumbedampfen", "level_number": "5.8.1", "level_type": "Untergruppe", "raw_fragment": "Vakuumbedampfen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Vakuumbestaeuben", "label": "Vakuumbestaeuben", "level_number": "5.8.2", "level_type": "Untergruppe", "raw_fragment": "Vakuumbestaeuben"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_gas-_oder_dampffoermigen_Zustand", "label": "Beschichten aus dem gas- oder dampffoermigen Zustand", "level_number": "5.8", "level_type": "Gruppe", "raw_fragment": "Beschichten_aus_dem_gas-_oder_dampffoermigen_Zustand"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Galvanisches_Beschichten", "label": "Galvanisches Beschichten", "level_number": "5.9.1", "level_type": "Untergruppe", "raw_fragment": "Galvanisches_Beschichten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Chemisches_Beschichten", "label": "Chemisches Beschichten", "level_number": "5.9.2", "level_type": "Untergruppe", "raw_fragment": "Chemisches_Beschichten"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten_aus_dem_ionisierten_Zustand", "label": "Beschichten aus dem ionisierten Zustand", "level_number": "5.9", "level_type": "Gruppe", "raw_fragment": "Beschichten_aus_dem_ionisierten_Zustand"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Beschichten", "label": "Beschichten", "level_number": "5", "level_type": "Hauptgruppe", "raw_fragment": "Beschichten"}, {"children": [{"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Verfestigungsstrahlen", "label": "Verfestigungsstrahlen", "level_number": "6.1.1", "level_type": "Untergruppe", "raw_fragment": "Verfestigungsstrahlen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Verfestigen_durch_Walzen", "label": "Verfestigen durch Walzen", "level_number": "6.1.2", "level_type": "Untergruppe", "raw_fragment": "Verfestigen_durch_Walzen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Verfestigen_durch_Ziehen", "label": "Verfestigen durch Ziehen", "level_number": "6.1.3", "level_type": "Untergruppe", "raw_fragment": "Verfestigen_durch_Ziehen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Verfestigen_durch_Schmieden", "label": "Verfestigen durch Schmieden", "level_number": "6.1.4", "level_type": "Untergruppe", "raw_fragment": "Verfestigen_durch_Schmieden"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Verfestigen_durch_Umformen", "label": "Verfestigen durch Umformen", "level_number": "6.1", "level_type": "Gruppe", "raw_fragment": "Verfestigen_durch_Umformen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Gluehen", "label": "Gluehen", "level_number": "6.2.1", "level_type": "Untergruppe", "raw_fragment": "Gluehen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Haerten", "label": "Haerten", "level_number": "6.2.2", "level_type": "Untergruppe", "raw_fragment": "Haerten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Isothermisches_Umwandeln", "label": "Isothermisches Umwandeln", "level_number": "6.2.3", "level_type": "Untergruppe", "raw_fragment": "Isothermisches_Umwandeln"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Anlassen_oder_Auslagern", "label": "Anlassen oder Auslagern", "level_number": "6.2.4", "level_type": "Untergruppe", "raw_fragment": "Anlassen_oder_Auslagern"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Vergueten", "label": "Vergueten", "level_number": "6.2.5", "level_type": "Untergruppe", "raw_fragment": "Vergueten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Tiefkuehlen", "label": "Tiefkuehlen", "level_number": "6.2.6", "level_type": "Untergruppe", "raw_fragment": "Tiefkuehlen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Thermochemisches_Behandeln", "label": "Thermochemisches Behandeln", "level_number": "6.2.7", "level_type": "Untergruppe", "raw_fragment": "Thermochemisches_Behandeln"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Aushaerten", "label": "Aushaerten", "level_number": "6.2.8", "level_type": "Untergruppe", "raw_fragment": "Aushaerten"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Waermebehandeln", "label": "Waermebehandeln", "level_number": "6.2", "level_type": "Gruppe", "raw_fragment": "Waermebehandeln"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Austenitformhaerten", "label": "Austenitformhaerten", "level_number": "6.3.1", "level_type": "Untergruppe", "raw_fragment": "Austenitformhaerten"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Heissisostatisches_Nachverdichten", "label": "Heissisostatisches Nachverdichten", "level_number": "6.3.2", "level_type": "Untergruppe", "raw_fragment": "Heissisostatisches_Nachverdichten"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Thermomechanisches_Behandeln", "label": "Thermomechanisches Behandeln", "level_number": "6.3", "level_type": "Gruppe", "raw_fragment": "Thermomechanisches_Behandeln"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Sintern_oder_Brennen", "label": "Sintern oder Brennen", "level_number": "6.4", "level_type": "Gruppe", "raw_fragment": "Sintern_oder_Brennen"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Magnetisieren", "label": "Magnetisieren", "level_number": "6.5", "level_type": "Gruppe", "raw_fragment": "Magnetisieren"}, {"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Bestrahlen", "label": "Bestrahlen", "level_number": "6.6", "level_type": "Gruppe", "raw_fragment": "Bestrahlen"}, {"children": [{"children": [], "id": "http://www.w3id.org/hsu-aut/DIN8580#Belichten", "label": "Belichten", "level_number": "6.7.1", "level_type": "Untergruppe", "raw_fragment": "Belichten"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Photochemische_Verfahren", "label": "Photochemische Verfahren", "level_number": "6.7", "level_type": "Gruppe", "raw_fragment": "Photochemische_Verfahren"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Stoffeigenschaft_aendern", "label": "Stoffeigenschaft aendern", "level_number": "6", "level_type": "Hauptgruppe", "raw_fragment": "Stoffeigenschaft_aendern"}], "id": "http://www.w3id.org/hsu-aut/DIN8580#Fertigungsverfahren", "label": "Fertigungsverfahren", "level_number": null, "level_type": null, "raw_fragment": "Fertigungsverfahren"}], "source": "/Users/mkoehler/Documents/claude/2026-02-26 DIN/artifacts/DIN8580.owl"};
+
+    const chart = document.getElementById('chart');
+    const tooltip = document.getElementById('tooltip');
+    const statusEl = document.getElementById('status');
+    const metaEl = document.getElementById('meta');
+    const searchEl = document.getElementById('search');
+    const expandAllBtn = document.getElementById('expandAll');
+    const collapseAllBtn = document.getElementById('collapseAll');
+    const resetViewBtn = document.getElementById('resetView');
+
+    metaEl.textContent = `source: ${graphData.source} | nodes: ${graphData.node_count} | edges: ${graphData.edge_count} | roots: ${graphData.roots.length}`;
+
+    const rootPayload = {
+      id: 'urn:local:din8580:root',
+      raw_fragment: 'DIN8580',
+      label: 'DIN8580',
+      children: graphData.roots,
+    };
+
+    const margin = { top: 20, right: 260, bottom: 20, left: 220 };
+    const width = Math.max(chart.clientWidth, 1000);
+    const height = Math.max(chart.clientHeight, 800);
+
+    const svg = d3
+      .select('#chart')
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height)
+      .attr('viewBox', [0, 0, width, height]);
+
+    const g = svg.append('g');
+
+    const zoom = d3.zoom().scaleExtent([0.25, 2.5]).on('zoom', ({ transform }) => {
+      g.attr('transform', transform);
+    });
+    svg.call(zoom);
+
+    const root = d3.hierarchy(rootPayload);
+    root.x0 = height / 2;
+    root.y0 = 0;
+
+    const LINE_WRAP_AT = 36;
+    const LINE_HEIGHT_PX = 14;
+    const DEPTH_GAP_X = 80;
+    const ROW_GAP_Y = 34;
+    const COLLISION_PADDING = 10;
+    const DEPTH_PADDING = 58;
+    const NODE_TEXT_FONT = "12px 'Avenir Next', 'Segoe UI', sans-serif";
+    const textMeasureCanvas = document.createElement('canvas');
+    const textMeasureCtx = textMeasureCanvas.getContext('2d');
+    textMeasureCtx.font = NODE_TEXT_FONT;
+
+    const treeLayout = d3
+      .tree()
+      .nodeSize([ROW_GAP_Y, DEPTH_GAP_X])
+      .separation((a, b) => {
+        if (a.parent === b.parent) return 1.35;
+        return 1.8;
+      });
+    let nodeId = 0;
+
+    root.descendants().forEach((d) => {
+      d.id = ++nodeId;
+      d._children = d.children;
+      if (d.depth > 1) {
+        d.children = null;
+      }
+    });
+
+    function diagonal(link) {
+      return `M${link.source.y},${link.source.x}
+              C${(link.source.y + link.target.y) / 2},${link.source.x}
+               ${(link.source.y + link.target.y) / 2},${link.target.x}
+               ${link.target.y},${link.target.x}`;
+    }
+
+    function wrapLabel(text, maxChars = LINE_WRAP_AT) {
+      const value = (text || '').trim();
+      if (!value) return [''];
+
+      const words = value.split(/\s+/);
+      const lines = [];
+      let current = '';
+
+      for (const word of words) {
+        const next = current ? `${current} ${word}` : word;
+        if (next.length <= maxChars) {
+          current = next;
+          continue;
+        }
+        if (current) lines.push(current);
+        current = word;
+      }
+      if (current) lines.push(current);
+      return lines.length ? lines : [value];
+    }
+
+    function nodeLabelText(node) {
+      const label = (node.data.label || '').trim();
+      const number = (node.data.level_number || '').trim();
+      if (!number) return label;
+      return `[${number}] ${label}`.trim();
+    }
+
+    function labelHeightPx(node) {
+      const lineCount = (node._labelLines && node._labelLines.length) || 1;
+      return lineCount * LINE_HEIGHT_PX + 6;
+    }
+
+    function labelWidthPx(node) {
+      const lines = node._labelLines || [''];
+      let maxWidth = 0;
+      for (const line of lines) {
+        const w = textMeasureCtx.measureText(line).width;
+        if (w > maxWidth) maxWidth = w;
+      }
+      return Math.ceil(maxWidth) + 24; // text padding + visual breathing room
+    }
+
+    function allNodes(node) {
+      const out = [];
+      (function visit(current) {
+        out.push(current);
+        const kids = current._children || [];
+        kids.forEach((child) => visit(child));
+      })(node);
+      return out;
+    }
+
+    function resolveVerticalCollisions(nodes) {
+      const byDepth = d3.group(nodes, (d) => d.depth);
+      for (const depthNodes of byDepth.values()) {
+        const sorted = depthNodes.slice().sort((a, b) => a.x - b.x);
+        for (let i = 1; i < sorted.length; i += 1) {
+          const prev = sorted[i - 1];
+          const curr = sorted[i];
+          const requiredGap = (labelHeightPx(prev) + labelHeightPx(curr)) / 2 + COLLISION_PADDING;
+          if (curr.x - prev.x < requiredGap) {
+            curr.x = prev.x + requiredGap;
+          }
+        }
+      }
+    }
+
+    function resolveHorizontalDepthSpacing(nodes) {
+      const byDepth = d3.group(nodes, (d) => d.depth);
+      const depths = Array.from(byDepth.keys()).sort((a, b) => a - b);
+      const yByDepth = new Map();
+      let cursorY = 0;
+
+      depths.forEach((depth) => {
+        if (depth === 0) {
+          yByDepth.set(depth, 0);
+          return;
+        }
+        const prevDepth = depth - 1;
+        const prevNodes = byDepth.get(prevDepth) || [];
+        let prevMaxWidth = 0;
+        prevNodes.forEach((n) => {
+          prevMaxWidth = Math.max(prevMaxWidth, labelWidthPx(n));
+        });
+        cursorY = cursorY + prevMaxWidth + DEPTH_PADDING;
+        yByDepth.set(depth, cursorY);
+      });
+
+      nodes.forEach((n) => {
+        const resolved = yByDepth.get(n.depth);
+        if (typeof resolved === 'number') {
+          n.y = resolved;
+        }
+      });
+    }
+
+    function update(source, highlightedNodeIds = new Set(), highlightedLinkIds = new Set()) {
+      treeLayout(root);
+
+      const nodes = root.descendants();
+      nodes.forEach((d) => {
+        d._labelLines = wrapLabel(nodeLabelText(d));
+      });
+      resolveVerticalCollisions(nodes);
+      resolveHorizontalDepthSpacing(nodes);
+      const links = root.links();
+
+      const minX = d3.min(nodes, (d) => d.x) - margin.top;
+      const maxX = d3.max(nodes, (d) => d.x) + margin.bottom;
+      const maxY = d3.max(nodes, (d) => d.y) + margin.right;
+
+      svg.attr('viewBox', [0, minX, Math.max(width, maxY + margin.left), maxX - minX + margin.top + margin.bottom]);
+
+      const node = g.selectAll('g.node').data(nodes, (d) => d.id);
+
+      const nodeEnter = node
+        .enter()
+        .append('g')
+        .attr('class', 'node')
+        .attr('transform', () => `translate(${source.y0},${source.x0})`)
+        .on('click', (event, d) => {
+          d.children = d.children ? null : d._children;
+          update(d, highlightedNodeIds, highlightedLinkIds);
+        })
+        .on('mousemove', (event, d) => {
+          tooltip.style.opacity = 1;
+          tooltip.textContent = d.data.id;
+          tooltip.style.left = `${event.offsetX}px`;
+          tooltip.style.top = `${event.offsetY}px`;
+        })
+        .on('mouseleave', () => {
+          tooltip.style.opacity = 0;
+        });
+
+      nodeEnter.append('circle').attr('r', 4.5);
+
+      nodeEnter.append('rect').attr('class', 'label-bg');
+
+      nodeEnter
+        .append('text')
+        .attr('x', 12)
+        .attr('text-anchor', 'start');
+
+      const nodeMerged = node
+        .merge(nodeEnter)
+        .attr('class', (d) => {
+          const cls = ['node'];
+          if (highlightedNodeIds.has(d.id)) cls.push('match');
+          return cls.join(' ');
+        });
+
+      nodeMerged
+        .select('text')
+        .each(function(d) {
+          const textSel = d3.select(this);
+          const lines = d._labelLines || [d.data.label || ''];
+          textSel.text(null);
+          textSel.selectAll('tspan').remove();
+          const startDy = -((lines.length - 1) * 0.55);
+          lines.forEach((line, idx) => {
+            textSel
+              .append('tspan')
+              .attr('x', 12)
+              .attr('dy', idx === 0 ? `${startDy}em` : '1.1em')
+              .text(line);
+          });
+        });
+
+      nodeMerged
+        .transition()
+        .duration(220)
+        .attr('transform', (d) => `translate(${d.y},${d.x})`);
+
+      // Keep labels readable by placing a background box behind each text.
+      g.selectAll('g.node').each(function() {
+        const nodeSel = d3.select(this);
+        const text = nodeSel.select('text');
+        const textEl = text.node();
+        if (!textEl) return;
+        const bbox = textEl.getBBox();
+        nodeSel
+          .select('rect.label-bg')
+          .attr('x', bbox.x - 4)
+          .attr('y', bbox.y - 2)
+          .attr('width', bbox.width + 8)
+          .attr('height', bbox.height + 4);
+      });
+
+      node.exit().transition().duration(220).attr('transform', () => `translate(${source.y},${source.x})`).remove();
+
+      const link = g.selectAll('path.link').data(links, (d) => d.target.id);
+
+      const linkEnter = link
+        .enter()
+        .insert('path', 'g')
+        .attr('class', 'link')
+        .attr('d', () => {
+          const p = { x: source.x0, y: source.y0 };
+          return diagonal({ source: p, target: p });
+        });
+
+      link
+        .merge(linkEnter)
+        .transition()
+        .duration(220)
+        .attr('d', diagonal)
+        .attr('class', (d) => {
+          const cls = ['link'];
+          if (highlightedLinkIds.has(d.target.id)) cls.push('match-path');
+          return cls.join(' ');
+        });
+
+      link
+        .exit()
+        .transition()
+        .duration(220)
+        .attr('d', () => {
+          const p = { x: source.x, y: source.y };
+          return diagonal({ source: p, target: p });
+        })
+        .remove();
+
+      root.eachBefore((d) => {
+        d.x0 = d.x;
+        d.y0 = d.y;
+      });
+    }
+
+    function setAllExpanded(node, expanded) {
+      if (!node._children) node._children = node.children;
+      node.children = expanded ? node._children : null;
+      const kids = node._children || [];
+      kids.forEach((child) => setAllExpanded(child, expanded));
+    }
+
+    function captureExpansionState(node) {
+      const state = new Map();
+      allNodes(node).forEach((n) => {
+        state.set(n.id, Boolean(n.children));
+      });
+      return state;
+    }
+
+    function restoreExpansionState(node, state) {
+      allNodes(node).forEach((n) => {
+        const shouldExpand = state.get(n.id);
+        n.children = shouldExpand ? n._children : null;
+      });
+      node.children = node._children;
+    }
+
+    function expandPath(node) {
+      let current = node;
+      while (current) {
+        if (current._children) current.children = current._children;
+        current = current.parent;
+      }
+    }
+
+    let searchActive = false;
+    let preSearchState = null;
+
+    function applySearchLayoutReset() {
+      setAllExpanded(root, false);
+      root.children = root._children;
+    }
+
+    function runSearch(term) {
+      const query = term.trim().toLowerCase();
+      const nodeMatches = new Set();
+      const linkMatches = new Set();
+
+      if (!query) {
+        if (searchActive && preSearchState) {
+          restoreExpansionState(root, preSearchState);
+        }
+        searchActive = false;
+        preSearchState = null;
+        statusEl.textContent = `${root.descendants().length} visible nodes`;
+        update(root, nodeMatches, linkMatches);
+        return;
+      }
+
+      if (!searchActive) {
+        preSearchState = captureExpansionState(root);
+        searchActive = true;
+      }
+
+      applySearchLayoutReset();
+
+      const matched = allNodes(root).filter((d) => {
+        const label = (d.data.label || '').toLowerCase();
+        const raw = (d.data.raw_fragment || '').toLowerCase();
+        const level = (d.data.level_number || '').toLowerCase();
+        return label.includes(query) || raw.includes(query) || level.includes(query);
+      });
+
+      matched.forEach((d) => {
+        nodeMatches.add(d.id);
+        expandPath(d);
+        let current = d;
+        while (current && current.parent) {
+          linkMatches.add(current.id);
+          current = current.parent;
+        }
+      });
+
+      statusEl.textContent = `${matched.length} matches`;
+      update(root, nodeMatches, linkMatches);
+    }
+
+    expandAllBtn.addEventListener('click', () => {
+      setAllExpanded(root, true);
+      update(root);
+      statusEl.textContent = `${root.descendants().length} visible nodes`;
+    });
+
+    collapseAllBtn.addEventListener('click', () => {
+      setAllExpanded(root, false);
+      root.children = root._children;
+      update(root);
+      statusEl.textContent = `${root.descendants().length} visible nodes`;
+    });
+
+    resetViewBtn.addEventListener('click', () => {
+      svg.transition().duration(250).call(zoom.transform, d3.zoomIdentity);
+    });
+
+    let searchTimer = null;
+    searchEl.addEventListener('input', (event) => {
+      const term = event.target.value;
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => runSearch(term), 120);
+    });
+
+    update(root);
+    statusEl.textContent = `${root.descendants().length} visible nodes`;
+  </script>
+</body>
+</html>
