@@ -242,14 +242,21 @@ HTML_TEMPLATE = """<!doctype html>
       }
     });
 
+    let depthExitByDepth = new Map();
+
     function diagonal(link) {
       const sourceAnchorY = link.source.y + (link.source._labelRight || 0);
       const targetAnchorY = link.target.y;
-      const midY = (sourceAnchorY + targetAnchorY) / 2;
+      const levelExitY = (depthExitByDepth.get(link.source.depth) || sourceAnchorY) + 24;
+      let corridorY = Math.max(levelExitY, sourceAnchorY + 24);
+      if (corridorY > targetAnchorY - 14) {
+        corridorY = (sourceAnchorY + targetAnchorY) / 2;
+      }
+
       return `M${sourceAnchorY},${link.source.x}
-              C${midY},${link.source.x}
-               ${midY},${link.target.x}
-               ${targetAnchorY},${link.target.x}`;
+              L${corridorY},${link.source.x}
+              L${corridorY},${link.target.x}
+              L${targetAnchorY},${link.target.x}`;
     }
 
     function wrapLabel(text, maxChars = LINE_WRAP_AT) {
@@ -355,9 +362,18 @@ HTML_TEMPLATE = """<!doctype html>
       const nodes = root.descendants();
       nodes.forEach((d) => {
         d._labelLines = wrapLabel(nodeLabelText(d));
+        d._labelRight = labelWidthPx(d);
       });
       resolveVerticalCollisions(nodes);
       resolveHorizontalDepthSpacing(nodes);
+      depthExitByDepth = new Map();
+      nodes.forEach((n) => {
+        const absRight = n.y + (n._labelRight || 0);
+        const current = depthExitByDepth.get(n.depth) || Number.NEGATIVE_INFINITY;
+        if (absRight > current) {
+          depthExitByDepth.set(n.depth, absRight);
+        }
+      });
       const links = root.links();
 
       const minX = d3.min(nodes, (d) => d.x) - margin.top;
@@ -442,7 +458,7 @@ HTML_TEMPLATE = """<!doctype html>
           .attr('y', bbox.y - 2)
           .attr('width', boxWidth)
           .attr('height', bbox.height + 4);
-        datum._labelRight = Math.max(0, boxX + boxWidth);
+        datum._labelRight = Math.max(datum._labelRight || 0, boxX + boxWidth);
       });
 
       node.exit().transition().duration(220).attr('transform', () => `translate(${source.y},${source.x})`).remove();
